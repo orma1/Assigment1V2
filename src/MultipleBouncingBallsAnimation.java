@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MultipleFramesBouncingBallsAnimation {
+public class MultipleBouncingBallsAnimation {
 
         public static void main(String [] args){
             int size;

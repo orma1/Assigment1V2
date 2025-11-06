@@ -52,6 +52,9 @@ public class AbstractArtDrawing {
         int y2 = (int) l.end().getY();
         d.drawLine(x1,y1,x2,y2);
     }
-
+    public static void main(String[] args){
+        AbstractArtDrawing abstractArtDrawing = new AbstractArtDrawing();
+        abstractArtDrawing.drawRandomLines();
+    }
 
 }
