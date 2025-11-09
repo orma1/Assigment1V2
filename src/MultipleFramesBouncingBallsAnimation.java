@@ -7,40 +7,57 @@ import java.util.Random;
 
 public class MultipleFramesBouncingBallsAnimation {
     static final int FRAME1_SIZE = 450;
-    static final int FRAME2_SIZE = 600;
+    static final int FRAME1_START = 50;
+    static final int FRAME2_SIZE = 150;
+    static final int FRAME2_START = 450;
+    static final int FRAME_HEIGHT = 600;
+    static final int FRAME_WIDTH = 1000;
     public static void main(String[] args){
         int size;
-        Ball[] rightFrameBalls = new Ball[args.length/2];
-        Ball[] leftFrameBalls = new Ball[args.length/2];
         Random rand = new Random();
-        for (int i = 0; i < args.length; i++) {
+        Ball[] balls = new Ball[args.length];
+        for (int i = 0; i < balls.length; i++) {
             size = Integer.parseInt(args[i]);
-            int x = rand.nextInt(200);
-            int y = rand.nextInt(200);
+            int x,y;
+            if(i < Math.floor(balls.length)/2) {
+                x = rand.nextInt(50,500);
+                y = rand.nextInt(50,500);
+            }
+            else {
+                x = rand.nextInt(450,600);
+                y = rand.nextInt(450,600);
+            }
             Point start = new Point(x,y);
             Velocity v;
             if (size > 50) v = Velocity.fromAngleAndSpeed(x,3);
             else v = Velocity.fromAngleAndSpeed(x,200/size);
             balls[i] = new Ball(start,size, Color.BLACK);
             balls[i].setVelocity(v);
+
         }
         drawAnimation(balls);
+
     }
     static void drawAnimation(Ball[] balls) {
-        GUI gui = new GUI("title", FRAME1_SIZE+FRAME2_SIZE,
-                FRAME1_SIZE+FRAME2_SIZE);
+        GUI gui = new GUI("check", FRAME_WIDTH, FRAME_HEIGHT);
         Sleeper sleeper = new Sleeper();
         DrawSurface d;
         while (true) {
             d = gui.getDrawSurface();
+            d.setColor(Color.GRAY);
+            d.fillRectangle(FRAME1_START,FRAME1_START,FRAME1_SIZE,FRAME1_SIZE);
+            d.setColor(Color.YELLOW);
+            d.fillRectangle(FRAME2_START,FRAME2_START,FRAME2_SIZE,FRAME2_SIZE);
             for (int i = 0; i < balls.length; i++) {
                 balls[i].moveOneStep();
                 balls[i].drawOn(d);
                 sleeper.sleepFor(50);  // wait for 50 milliseconds.
             }
             gui.show(d);
+            }
+
         }
 
 
     }
-}
+
