@@ -38,9 +38,17 @@ public class MultipleFramesBouncingBallsAnimation {
 
     }
     static void drawAnimation(Ball[] balls) {
+        Random rand = new Random();
         GUI gui = new GUI("check", FRAME_WIDTH, FRAME_HEIGHT);
         Sleeper sleeper = new Sleeper();
         DrawSurface d;
+        Color [] ballColors = new Color[balls.length];
+        for (int i = 0; i < balls.length; i++) {
+            int red = rand.nextInt(256);
+            int green = rand.nextInt(256);
+            int blue = rand.nextInt(256);
+            ballColors[i]= new Color(red,green,blue);
+        }
         while (true) {
             d = gui.getDrawSurface();
             d.setColor(Color.GRAY);
@@ -54,7 +62,7 @@ public class MultipleFramesBouncingBallsAnimation {
             for (int i = 0; i < balls.length; i++) {
                 if(i < Math.floor((balls.length)/2.0)) balls[i].moveOneStepWithFrame(frame1Start,frame1End);
                 else balls[i].moveOneStepWithFrame(frame2Start,frame2End);
-                d.setColor(Color.BLUE);
+                d.setColor(ballColors[i]);
                 balls[i].drawOn(d);
                 sleeper.sleepFor(50);  // wait for 50 milliseconds.
             }
