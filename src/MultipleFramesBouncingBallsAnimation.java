@@ -48,8 +48,14 @@ public class MultipleFramesBouncingBallsAnimation {
             d.fillRectangle(FRAME1_START,FRAME1_START,FRAME1_SIZE,FRAME1_SIZE);
             d.setColor(Color.YELLOW);
             d.fillRectangle(FRAME2_START,FRAME2_START,FRAME2_SIZE,FRAME2_SIZE);
+            Point frame1Start = new Point(FRAME1_START,FRAME1_START);
+            Point frame1End = new Point(FRAME1_START+FRAME1_SIZE,FRAME1_START+FRAME1_SIZE);
+            Point frame2Start = new Point(FRAME2_START,FRAME2_START);
+            Point frame2End = new Point(FRAME2_START+FRAME2_SIZE,FRAME2_START+FRAME2_SIZE);
             for (int i = 0; i < balls.length; i++) {
-                balls[i].moveOneStep();
+                if(i < Math.floor(balls.length)/2) balls[i].moveOneStepWithFrame(frame1Start,frame1End);
+                else balls[i].moveOneStepWithFrame(frame2Start,frame2End);
+                d.setColor(Color.BLUE);
                 balls[i].drawOn(d);
                 sleeper.sleepFor(50);  // wait for 50 milliseconds.
             }

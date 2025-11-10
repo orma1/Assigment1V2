@@ -64,5 +64,26 @@ public class Ball {
         }
         this.center = this.getVelocity().applyToPoint(this.center);
     }
-
+    public void moveOneStepWithFrame(Point p1, Point p2) {
+        if (v == null){
+            v = new Velocity(0,0);
+        }
+        if(this.getX() + v.getDx() - r <= p1.getX() && v.getDx()<0 ){
+            v.setDx(-v.getDx());
+            this.center.setX(p1.getX() + r);
+        }
+        if(this.getX() + v.getDx() + r >= p2.getX() && v.getDx()>0 ){
+            v.setDx(-v.getDx());
+            this.center.setX(p2.getX() - r);
+        }
+        if(this.getY() + v.getDy() - r<= p1.getY() && v.getDy()<0 ){
+            v.setDy(-v.getDy());
+            this.center.setY(p1.getY() + r);
+        }
+        if(this.getY() + v.getDy() + r>= p2.getY() && v.getDy()>0 ){
+            v.setDy(-v.getDy());
+            this.center.setY(p2.getY() - r);
+        }
+        this.center = this.getVelocity().applyToPoint(this.center);
+    }
 }
