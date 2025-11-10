@@ -1,10 +1,7 @@
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
-
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class MultipleBouncingBallsAnimation {
@@ -39,9 +36,5 @@ public class MultipleBouncingBallsAnimation {
                 }
                 gui.show(d);
             }
-
-
     }
-
-
 }

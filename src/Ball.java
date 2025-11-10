@@ -46,22 +46,7 @@ public class Ball {
     }
 
     public void moveOneStep() {
-        if (v == null){
-            v = new Velocity(0,0);
-        }
-        if(this.getX() + v.getDx() - r <= 0 && v.getDx()<0 ){
-            v.setDx(-v.getDx());
-        }
-        if(this.getX() + v.getDx() + r >= 200 && v.getDx()>0 ){
-            v.setDx(-v.getDx());
-        }
-        if(this.getY() + v.getDy() - r<= 0 && v.getDy()<0 ){
-            v.setDy(-v.getDy());
-        }
-        if(this.getY() + v.getDy() + r>= 200 && v.getDy()>0 ){
-            v.setDy(-v.getDy());
-        }
-        this.center = this.getVelocity().applyToPoint(this.center);
+        moveOneStepWithFrame(new Point(0,0), new Point(200,200));
     }
     public void moveOneStepWithFrame(Point p1, Point p2) {
         if (v == null){
