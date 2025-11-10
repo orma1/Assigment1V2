@@ -1,4 +1,3 @@
-import biuoop.GUI;
 import biuoop.DrawSurface;
 public class Ball {
     private Point center;

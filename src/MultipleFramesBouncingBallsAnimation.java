@@ -19,7 +19,7 @@ public class MultipleFramesBouncingBallsAnimation {
         for (int i = 0; i < balls.length; i++) {
             size = Integer.parseInt(args[i]);
             int x,y;
-            if(i < Math.floor(balls.length)/2) {
+            if(i < Math.floor((balls.length)/2.0)) {
                 x = rand.nextInt(50,500);
                 y = rand.nextInt(50,500);
             }
@@ -27,11 +27,10 @@ public class MultipleFramesBouncingBallsAnimation {
                 x = rand.nextInt(450,600);
                 y = rand.nextInt(450,600);
             }
-            Point start = new Point(x,y);
             Velocity v;
             if (size > 50) v = Velocity.fromAngleAndSpeed(x,3);
             else v = Velocity.fromAngleAndSpeed(x,200/size);
-            balls[i] = new Ball(start,size, Color.BLACK);
+            balls[i] = new Ball(new Point(x,y),size, Color.BLACK);
             balls[i].setVelocity(v);
 
         }
@@ -53,7 +52,7 @@ public class MultipleFramesBouncingBallsAnimation {
             Point frame2Start = new Point(FRAME2_START,FRAME2_START);
             Point frame2End = new Point(FRAME2_START+FRAME2_SIZE,FRAME2_START+FRAME2_SIZE);
             for (int i = 0; i < balls.length; i++) {
-                if(i < Math.floor(balls.length)/2) balls[i].moveOneStepWithFrame(frame1Start,frame1End);
+                if(i < Math.floor((balls.length)/2.0)) balls[i].moveOneStepWithFrame(frame1Start,frame1End);
                 else balls[i].moveOneStepWithFrame(frame2Start,frame2End);
                 d.setColor(Color.BLUE);
                 balls[i].drawOn(d);

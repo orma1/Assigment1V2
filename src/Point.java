@@ -11,7 +11,7 @@ public class Point {
         return Math.sqrt((this.x-other.x)*(this.x-other.x)+(this.y-other.y)*(this.y-other.y));
     }
 
-    // equals -- return true is the points are equal, false otherwise
+    // equals -- return true if the points are equal, false otherwise
     public boolean equals(Point other) {
         if(this.x != other.x) return false;
         if(this.y != other.y) return false;
