@@ -1,6 +1,5 @@
 import biuoop.GUI;
 import biuoop.DrawSurface;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,7 +14,7 @@ public class AbstractArtDrawing {
         GUI gui = new GUI("Random Lines Drawer", 400, 300);
         DrawSurface d = gui.getDrawSurface();
         List<Line> lines = new ArrayList<>();
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 10; ++i) {// we create random lines, and mark the middle in blue
             Line line = generateRandomLine(rand);
             lines.add(line);
             drawLine(line,d);
@@ -24,7 +23,7 @@ public class AbstractArtDrawing {
             d.fillCircle((int)middle.getX(),(int)middle.getY(),3);
         }
         d.setColor(Color.RED);
-        for (int i = 0; i < lines.size(); i++) {
+        for (int i = 0; i < lines.size(); i++) {//we go through all the lines and color the intersections in red
             Line line1 = lines.get(i);
             for (int j = i+1; j < lines.size(); j++) {
                 Line line2 = lines.get(j);
@@ -45,7 +44,7 @@ public class AbstractArtDrawing {
         return (new Line(x1,y1,x2,y2));
     }
     public static void drawLine(Line l, DrawSurface d){
-        d.setColor(Color.BLACK);
+        d.setColor(Color.BLACK); // set the color to black and send the line to be drawn
         int x1 = (int) l.start().getX();
         int y1 = (int) l.start().getY();
         int x2 = (int) l.end().getX();
