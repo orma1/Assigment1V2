@@ -16,7 +16,7 @@ public class Line {
     }
 
     // Returns the middle point of the line
-    public Point middle() {
+    public Point middle() {//get the average of x and y from two point and return it
         double middleX = (this.start.getX()+this.end.getX())/2.0;//we calculate the middle using 2.0 to stay double
         double middleY = (this.start.getY()+this.end.getY())/2.0;//we calculate the middle using 2.0 to stay double
         return (new Point(middleX,middleY));
