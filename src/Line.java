@@ -1,4 +1,4 @@
-import java.util.List;
+
 
 public class Line {
     private Point start,end;
@@ -33,13 +33,11 @@ public class Line {
     public Point end() {
         return this.end;
     }
-    private static double slope(Line line){
-        return (line.end.getY()-line.start.getY())/(line.end.getX()-line.end.getY());
-    }
+
 
     // Returns true if the lines intersect, false otherwise
     private double[] calculateValuesForDenom(Line other){
-        double[] values = new double[3];
+        double[] values = new double[3];//denom,t,u
         double thisStartX = this.start.getX();
         double thisStartY = this.start.getY();
         double thisEndX = this.end.getX();
@@ -58,7 +56,7 @@ public class Line {
     }
     public boolean isIntersecting(Line other) {
         double[] values = calculateValuesForDenom(other);
-        // Parallel or coincident
+        // Parallel or coincident if the denominator is 0
         if (values[0] == 0) {
             return false;
         }
@@ -71,16 +69,16 @@ public class Line {
     // Returns the intersection point if the lines intersect,
     // and null otherwise.
     public Point intersectionWith(Line other) {
-        if(!isIntersecting(other)) return null;
+        if(!isIntersecting(other)) return null;//null if lines do not intersect
         double[] values = calculateValuesForDenom(other);
-
         double t = values[1];
         return (new Point((this.start.getX()+t*(this.end.getX()-this.start.getX())),
                 (this.start.getY()+t*(this.end.getY()-this.start.getY()))));
     }
 
-    // equals -- return true is the lines are equal, false otherwise
+    // equals -- return true if the lines are equal, false otherwise
     public boolean equals(Line other) {
+        //we check both ways, because the points can be reversed.
         if(start == other.start && end == other.end) return true;
         if(start == other.end && end == other.start) return true;
         return false;

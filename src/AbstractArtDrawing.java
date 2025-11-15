@@ -16,7 +16,7 @@ public class AbstractArtDrawing {
         List<Line> lines = new ArrayList<>();
         for (int i = 0; i < 10; ++i) {// we create random lines, and mark the middle in blue
             Line line = generateRandomLine(rand);
-            lines.add(line);
+            lines.add(line); // add the random line to the list
             drawLine(line,d);
             d.setColor(Color.BLUE);
             Point middle = line.middle();
@@ -28,7 +28,7 @@ public class AbstractArtDrawing {
             for (int j = i+1; j < lines.size(); j++) {
                 Line line2 = lines.get(j);
                 Point intersection = line1.intersectionWith(line2);
-                if(intersection != null){
+                if(intersection != null){ //if the lines intersect we draw a red circle
                     d.fillCircle((int)intersection.getX(),(int)intersection.getY(),3);
                 }
 

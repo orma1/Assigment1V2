@@ -44,11 +44,12 @@ public class Ball {
     public Velocity getVelocity(){
         return this.v;
     }
-
+    //move one step according to velocity
     public void moveOneStep() {
         //if no frame is given, we set the default to 200
         moveOneStepWithFrame(new Point(0,0), new Point(200,200));
     }
+    //move step with borders of the frame.
     public void moveOneStepWithFrame(Point p1, Point p2) {
         if (v == null){
             //if there is no velocity, we create one, so we will not get null reference error
