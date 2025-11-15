@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Line {
     private Point start,end;
     // constructors
@@ -36,28 +38,32 @@ public class Line {
     }
 
     // Returns true if the lines intersect, false otherwise
-
-    public boolean isIntersecting(Line other) {
+    private double[] calculateValuesForDenom(Line other){
+        double[] values = new double[3];
         double thisStartX = this.start.getX();
         double thisStartY = this.start.getY();
         double thisEndX = this.end.getX();
         double thisEndY = this.end.getY();
-
         double otherStartX = other.start.getX();
         double otherStartY = other.start.getY();
         double otherEndX = other.end.getX();
         double otherEndY = other.end.getY();
-
-        double denom = (thisStartX - thisEndX) * (otherStartY - otherEndY) - (thisStartY - thisEndY) * (otherStartX - otherEndX);
-
+        //denominator
+        values[0] = (thisStartX - thisEndX) * (otherStartY - otherEndY) - (thisStartY - thisEndY) * (otherStartX - otherEndX);
+        //t
+        values[1] = ((thisStartX - otherStartX) * (otherStartY - otherEndY) - (thisStartY - otherStartY) * (otherStartX - otherEndX)) / values[0];
+        //u
+        values[2] = ((thisStartX - otherStartX) * (thisStartY - thisEndY) - (thisStartY - otherStartY) * (thisStartX - thisEndX)) / values[0];
+        return values;
+    }
+    public boolean isIntersecting(Line other) {
+        double[] values = calculateValuesForDenom(other);
         // Parallel or coincident
-        if (denom == 0) {
+        if (values[0] == 0) {
             return false;
         }
-
-        double t = ((thisStartX - otherStartX) * (otherStartY - otherEndY) - (thisStartY - otherStartY) * (otherStartX - otherEndX)) / denom;
-        double u = ((thisStartX - otherStartX) * (thisStartY - thisEndY) - (thisStartY - otherStartY) * (thisStartX - thisEndX)) / denom;
-
+        double t = values[1];
+        double u = values[2];
         // Check if intersection lies within both line segments
         return (t >= 0 && t <= 1 && u >= 0 && u <= 1);
     }
@@ -66,18 +72,11 @@ public class Line {
     // and null otherwise.
     public Point intersectionWith(Line other) {
         if(!isIntersecting(other)) return null;
-        double thisStartX = this.start.getX();
-        double thisStartY = this.start.getY();
-        double thisEndX = this.end.getX();
-        double thisEndY = this.end.getY();
+        double[] values = calculateValuesForDenom(other);
 
-        double otherStartX = other.start.getX();
-        double otherStartY = other.start.getY();
-        double otherEndX = other.end.getX();
-        double otherEndY = other.end.getY();
-        double denom = (thisStartX - thisEndX) * (otherStartY - otherEndY) - (thisStartY - thisEndY) * (otherStartX - otherEndX);
-        double t = ((thisStartX - otherStartX) * (otherStartY - otherEndY) - (thisStartY - otherStartY) * (otherStartX - otherEndX)) / denom;
-        return (new Point((thisStartX+t*(thisEndX-thisStartX)),(thisStartY+t*(thisEndY-thisStartY))));
+        double t = values[1];
+        return (new Point((this.start.getX()+t*(this.end.getX()-this.start.getX())),
+                (this.start.getY()+t*(this.end.getY()-this.start.getY()))));
     }
 
     // equals -- return true is the lines are equal, false otherwise

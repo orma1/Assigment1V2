@@ -30,4 +30,5 @@ public class Velocity {
     public Point applyToPoint(Point p){
         return new Point((p.getX()+dx),(p.getY()+dy));
     }
+    
 }
