@@ -1,4 +1,5 @@
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Line {
     private Point start,end;
@@ -82,6 +83,20 @@ public class Line {
         if(start == other.start && end == other.end) return true;
         if(start == other.end && end == other.start) return true;
         return false;
+    }
+    public Point closestIntersectionToStartOfLine(Rectangle rect){
+        Line fromPoint = new Line(this.start,this.end);
+        List<Point> intersections =
+                rect.intersectionPoints(fromPoint);
+        double smallestDistance = intersections.get(0).distance(start);
+        Point smallestPoint = intersections.get(0);
+        for (int i = 1; i < intersections.size(); i++) {
+            Point currentPoint = intersections.get(i);
+            if(currentPoint.distance(start) < smallestDistance){
+                smallestPoint = currentPoint;
+            }
+        }
+        return smallestPoint;
     }
 
 }
