@@ -12,7 +12,7 @@ public class Rectangle {
         this.height = height;
 
     }
-    private void setRecLines(){
+    protected void setRecLines(){
         recLines = new ArrayList<>();
         //top
         recLines.add(new Line(upperLeft,

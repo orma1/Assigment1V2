@@ -11,6 +11,7 @@ public class Block extends Rectangle implements Collidable {
 
     @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
-        return null;
+        //if vertical edge change horizontal direction,
+        //if horizontal edge change vertical direction.
     }
 }
