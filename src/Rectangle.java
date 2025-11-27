@@ -10,6 +10,7 @@ public class Rectangle {
         this.upperLeft = upperLeft;
         this.width = width;
         this.height = height;
+        setRecLines();
 
     }
     protected void setRecLines(){

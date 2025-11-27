@@ -4,6 +4,7 @@ public class Ball {
     private int r; //radius
     private java.awt.Color color;
     private Velocity v;
+    private GameEnvironment gameEnvironment;
     // constructor
     public Ball(Point center, int r, java.awt.Color color){
         this.center = center;
