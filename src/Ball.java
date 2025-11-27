@@ -48,7 +48,24 @@ public class Ball {
     //move one step according to velocity
     public void moveOneStep() {
         //if no frame is given, we set the default to 200
-        moveOneStepWithFrame(new Point(0,0), new Point(200,200));
+        //moveOneStepWithFrame(new Point(0,0), new Point(200,200));
+        if (v == null) v = new Velocity(0,0);
+        Line trajectory = new Line(center,
+                new Point(center.getX()+v.getDx(),center.getY()+v.getDy()));
+        CollisionInfo collisionInfo = gameEnvironment.getClosestCollision(trajectory);
+        if(collisionInfo == null){
+            //if no collisions, move like normal
+            center.setX(center.getX()+v.getDx());
+            center.setY(center.getY()+v.getDy());
+
+        }
+        else{
+            //we move the ball to almost the collision point
+            //TODO - Implement almost collision point
+            //we notify the object, and we update the velocity through hit.
+           Collidable collided = collisionInfo.collisionObject();
+           v = collided.hit(collisionInfo.collisionPoint(),v);
+        }
     }
     //move step with borders of the frame.
     public void moveOneStepWithFrame(Point p1, Point p2) {
