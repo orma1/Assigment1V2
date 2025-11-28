@@ -10,7 +10,10 @@ public class Game {
     private SpriteCollection sprites;
     private GameEnvironment environment;
     GUI gui;
-
+    public Game(){
+        sprites = new SpriteCollection();
+        environment = new GameEnvironment();
+    }
     public void addCollidable(Collidable c) {
         environment.addCollidable(c);
     }
