@@ -130,4 +130,7 @@ public class Ball implements Sprite {
         }
         this.center = this.getVelocity().applyToPoint(this.center);
     }
+    public void addToGame(Game game){
+        game.addSprite(this);
+    }
 }
