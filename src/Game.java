@@ -26,11 +26,17 @@ public class Game {
     // and add them to the game.
     public void initialize() {
         gui = new GUI("check", FRAME_WIDTH, FRAME_HEIGHT);
-        Ball ball = new Ball(400, 700, 20, Color.RED);
+        Ball ball = new Ball(400, 700, 20, Color.RED, environment);
         ball.addToGame(this);
-        for (...){
-            Block block = new Block(...);
-            block.addToGame(this);
+        for(int i = 0; i<= FRAME_WIDTH;i+=50){
+            Block left = new Block(new Point(0,i),50,50);
+            left.addToGame(this);
+            Block top = new Block(new Point(i,0),50,50);
+            top.addToGame(this);
+            Block right = new Block(new Point(FRAME_WIDTH,i),50,50);
+            right.addToGame(this);
+            Block bottom = new Block(new Point(i,FRAME_HEIGHT),50,50);
+            bottom.addToGame(this);
         }
     }
 

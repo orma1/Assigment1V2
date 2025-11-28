@@ -12,10 +12,23 @@ public class Ball implements Sprite {
         this.color = color;
         this.v = new Velocity(0,0);
     }
+    public Ball(Point center, int r, java.awt.Color color, GameEnvironment gameEnvironment){
+        this.gameEnvironment = gameEnvironment;
+        this.center = center;
+        this.r = r;
+        this.color = color;
+        this.v = new Velocity(0,0);
+    }
     public Ball(int x, int y, int r, java.awt.Color color){
         this.center = new Point(x,y);
         this.r = r;
         this.color = color;
+    }
+    public Ball(int x, int y, int r, java.awt.Color color, GameEnvironment gameEnvironment){
+        this.center = new Point(x,y);
+        this.r = r;
+        this.color = color;
+        this.gameEnvironment = gameEnvironment;
     }
 
     // accessors

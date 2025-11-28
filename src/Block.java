@@ -8,10 +8,16 @@ public class Block implements Collidable, Sprite {
 
     public Block(Rectangle collisionRect) {
         this.collisionRect = collisionRect;
+        this.upperLeft = collisionRect.getUpperLeft();
+        this.width = collisionRect.getWidth();
+        this.height = collisionRect.getHeight();
     }
 
     public Block(Point upperLeft, double width, double height) {
         this.collisionRect = new Rectangle(upperLeft, width, height);
+        this.upperLeft = upperLeft;
+        this.width = width;
+        this.height = height;
     }
 
     @Override
