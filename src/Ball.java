@@ -1,5 +1,5 @@
 import biuoop.DrawSurface;
-public class Ball {
+public class Ball implements Sprite {
     private Point center;
     private int r; //radius
     private java.awt.Color color;
@@ -36,6 +36,12 @@ public class Ball {
     public void drawOn(DrawSurface surface){
         surface.fillCircle(getX(),getY(),r);
     }
+
+    @Override
+    public void timePassed() {
+        moveOneStep();
+    }
+
     public void setVelocity(Velocity v){
         this.v = v;
     }
@@ -49,7 +55,8 @@ public class Ball {
     public void moveOneStep() {
         //if no frame is given, we set the default to 200
         //moveOneStepWithFrame(new Point(0,0), new Point(200,200));
-        if (v == null) v = new Velocity(0,0);
+        if (v == null) v = new Velocity(0,0);// if velocity is null we create 0 velocity to not crash
+        //we create the Line of the trajectory from the current position to the new one after applying velocity
         Line trajectory = new Line(center,
                 new Point(center.getX()+v.getDx(),center.getY()+v.getDy()));
         CollisionInfo collisionInfo = gameEnvironment.getClosestCollision(trajectory);
@@ -59,12 +66,40 @@ public class Ball {
             center.setY(center.getY()+v.getDy());
 
         }
-        else{
-            //we move the ball to almost the collision point
-            //TODO - Implement almost collision point
-            //we notify the object, and we update the velocity through hit.
-           Collidable collided = collisionInfo.collisionObject();
-           v = collided.hit(collisionInfo.collisionPoint(),v);
+        else {
+
+            Point collisionPoint = collisionInfo.collisionPoint();
+
+            // 2. Define a small "epsilon" distance to back up
+            double epsilon = 0.00001;
+
+            // 3. Calculate the new location slightly "before" the impact
+            // We back up on the X axis opposite to the velocity direction
+            double newX = collisionPoint.getX();
+            if (v.getDx() > 0) {
+                newX = newX - epsilon;
+            } else if (v.getDx() < 0) {
+                newX = newX + epsilon;
+            }
+
+            // We back up on the Y axis opposite to the velocity direction
+            double newY = collisionPoint.getY();
+            if (v.getDy() > 0) {
+                newY = newY - epsilon;
+            } else if (v.getDy() < 0) {
+                newY = newY + epsilon;
+            }
+
+            // 4. Move the ball to this "almost" collision point
+            this.center.setX(newX);
+            this.center.setY(newY);
+
+            // 5. Notify the hit object and update velocity
+            Collidable collided = collisionInfo.collisionObject();
+
+            // Important: We pass the EXACT collision point to the hit method,
+            // not the "almost" point, because the block expects to know where it was hit.
+            this.v = collided.hit(collisionPoint, this.v);
         }
     }
     //move step with borders of the frame.

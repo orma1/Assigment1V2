@@ -1,7 +1,10 @@
-import biuoop.DrawSurface; // If you need to draw it later
+import biuoop.DrawSurface;
 
-public class Block implements Collidable {
+public class Block implements Collidable, Sprite {
     private Rectangle collisionRect;
+    private Point upperLeft;
+    private double width, height;
+
 
     public Block(Rectangle collisionRect) {
         this.collisionRect = collisionRect;
@@ -46,5 +49,14 @@ public class Block implements Collidable {
         }
 
         return new Velocity(dx, dy);
+    }
+    public void drawOn(DrawSurface surface){
+        surface.fillRectangle((int) this.upperLeft.getX(), (int) this.upperLeft.getY(),
+                (int) width, (int) height);
+    }
+
+    @Override
+    public void timePassed() {
+        return;// for now, we do nothing
     }
 }
