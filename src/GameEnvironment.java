@@ -25,8 +25,8 @@ public class GameEnvironment {
             currentColidable = collidables.get(i);
             List<Point> collisionPoints = currentColidable.getCollisionRectangle().intersectionPoints(trajectory);
             for (int j = 0; j < collisionPoints.size(); j++) {
-                if(!collisionPoints.isEmpty()){
                     Point currentPoint = collisionPoints.get(j);
+                    if(currentPoint == null) continue;
                     double currentDistance = currentPoint.distance(trajectory.start());
                     if (closest == null) {
                         closest = currentPoint;
@@ -38,7 +38,7 @@ public class GameEnvironment {
                             closest = currentPoint;
                         }
                     }
-                }
+
             }
         }
         if(closest == null) return null;
