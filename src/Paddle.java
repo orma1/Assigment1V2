@@ -1,5 +1,6 @@
 import biuoop.DrawSurface;
 import biuoop.GUI;
+import biuoop.KeyboardSensor;
 
 import java.awt.*;
 
@@ -27,6 +28,8 @@ public class Paddle implements Sprite, Collidable {
     }
     public void drawOn(DrawSurface d){
         d.setColor(color);
+        if(keyboard.isPressed(KeyboardSensor.LEFT_KEY)) moveLeft();
+        if(keyboard.isPressed(KeyboardSensor.RIGHT_KEY)) moveRight();
         Point upperLeft = this.collisionRectangle.getUpperLeft();
         double width = this.collisionRectangle.getWidth();
         double height = this.collisionRectangle.getHeight();

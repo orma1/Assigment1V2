@@ -9,10 +9,12 @@ public class Game {
     private final int FRAME_HEIGHT = 600;
     private SpriteCollection sprites;
     private GameEnvironment environment;
+    private Paddle paddle;
     GUI gui;
     public Game(){
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
+
     }
     public void addCollidable(Collidable c) {
         environment.addCollidable(c);
@@ -26,6 +28,8 @@ public class Game {
     // and add them to the game.
     public void initialize() {
         gui = new GUI("check", FRAME_WIDTH, FRAME_HEIGHT);
+        paddle = new Paddle(new Rectangle(new Point(300,500),100,20),Color.YELLOW,gui);
+        paddle.addToGame(this);
         Ball ball = new Ball(400, 300, 20, Color.RED, environment);
         ball.setVelocity(new Velocity(5,5));
         ball.addToGame(this);
