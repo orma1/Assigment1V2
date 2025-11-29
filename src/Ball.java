@@ -1,4 +1,8 @@
 import biuoop.DrawSurface;
+
+import java.awt.*;
+import java.util.Random;
+
 public class Ball implements Sprite {
     private Point center;
     private int r; //radius
@@ -7,6 +11,7 @@ public class Ball implements Sprite {
     private GameEnvironment gameEnvironment;
     // constructor
     public Ball(Point center, int r, java.awt.Color color){
+
         this.center = center;
         this.r = r;
         this.color = color;
@@ -46,7 +51,8 @@ public class Ball implements Sprite {
     }
 
     // draw the ball on the given DrawSurface
-    public void drawOn(DrawSurface surface){
+    public void drawOn(DrawSurface surface) {
+        surface.setColor(color);
         surface.fillCircle(getX(),getY(),r);
     }
 

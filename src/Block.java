@@ -1,12 +1,20 @@
 import biuoop.DrawSurface;
 
+import java.awt.*;
+import java.util.Random;
+
 public class Block implements Collidable, Sprite {
     private Rectangle collisionRect;
     private Point upperLeft;
     private double width, height;
+    int r,g,b;
 
 
     public Block(Rectangle collisionRect) {
+        Random random = new Random();
+        int r = random.nextInt(255);
+        int g = random.nextInt(255);
+        int b = random.nextInt(255);
         this.collisionRect = collisionRect;
         this.upperLeft = collisionRect.getUpperLeft();
         this.width = collisionRect.getWidth();
@@ -57,6 +65,7 @@ public class Block implements Collidable, Sprite {
         return new Velocity(dx, dy);
     }
     public void drawOn(DrawSurface surface){
+        surface.setColor(new Color(r,g,b));
         surface.fillRectangle((int) this.upperLeft.getX(), (int) this.upperLeft.getY(),
                 (int) width, (int) height);
     }
