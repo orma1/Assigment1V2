@@ -5,9 +5,9 @@ import biuoop.KeyboardSensor;
 import java.awt.*;
 
 public class Paddle implements Sprite, Collidable {
-    private Rectangle collisionRectangle;
-    private Color color;
-    private biuoop.KeyboardSensor keyboard;
+    private final Rectangle collisionRectangle;
+    private final Color color;
+    private final biuoop.KeyboardSensor keyboard;
     public Paddle(Rectangle collisionRectangle, Color color, GUI gui){
         this.collisionRectangle = collisionRectangle;
         this.color = color;
@@ -64,12 +64,27 @@ public class Paddle implements Sprite, Collidable {
         }
 
         // Check if the collision point is on the horizontal edges (Top or Bottom)
-        // If so, reverse the vertical direction
+        // If so, we change the velocity according to the region
         if (Math.abs(y - rectTop) < epsilon || Math.abs(y - rectBottom) < epsilon) {
-            dy = -dy;
+            double regionWidth = getCollisionRectangle().getWidth()/5;
+            double collisionX = collisionPoint.getX();
+            if(collisionX > rectLeft && collisionX < rectLeft + regionWidth){// region 1
+                return Velocity.fromAngleAndSpeed(300, 5);
+            }
+            else if(collisionX > rectLeft + regionWidth && collisionX < rectLeft + regionWidth*2) {// region 2
+                return Velocity.fromAngleAndSpeed(330, 5);
+            }
+            else if(collisionX > rectLeft + regionWidth*2 && collisionX < rectLeft + regionWidth*3) {// region 3
+                return new Velocity(dx,-dy);
+            }
+            else if(collisionX > rectLeft + regionWidth*3 && collisionX < rectLeft + regionWidth*4) {// region 4
+                return Velocity.fromAngleAndSpeed(30, 5);
+            }
+            else if(collisionX > rectLeft + regionWidth*4 && collisionX < rectLeft + regionWidth*5) {// region 5
+                return Velocity.fromAngleAndSpeed(60, 5);
+            }
         }
-
-        return new Velocity(dx, dy);
+        return new Velocity(dx,dy);
     }
 
     // Add this paddle to the game.

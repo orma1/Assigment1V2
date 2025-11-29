@@ -1,33 +1,17 @@
 import biuoop.DrawSurface;
-
 import java.awt.*;
-import java.util.Random;
-
 public class Block implements Collidable, Sprite {
-    private Rectangle collisionRect;
-    private Point upperLeft;
-    private double width, height;
-    private Color color;
+    private final Rectangle collisionRect;
+    private final Point upperLeft;
+    private final double width;
+    private final double height;
+    private final Color color;
 
 
-    public Block(Rectangle collisionRect) {
-        Random random = new Random();
-        int r = random.nextInt(255);
-        int g = random.nextInt(255);
-        int b = random.nextInt(255);
-        this.color = new Color(r,g,b);
-        this.collisionRect = collisionRect;
-        this.upperLeft = collisionRect.getUpperLeft();
-        this.width = collisionRect.getWidth();
-        this.height = collisionRect.getHeight();
-    }
 
-    public Block(Point upperLeft, double width, double height) {
-        Random random = new Random();
-        int r = random.nextInt(255);
-        int g = random.nextInt(255);
-        int b = random.nextInt(255);
-        this.color = new Color(r,g,b);
+
+    public Block(Point upperLeft, double width, double height, Color color) {
+        this.color = color;
         this.collisionRect = new Rectangle(upperLeft, width, height);
         this.upperLeft = upperLeft;
         this.width = width;
@@ -78,7 +62,7 @@ public class Block implements Collidable, Sprite {
 
     @Override
     public void timePassed() {
-        return;// for now, we do nothing
+        // for now, we do nothing
     }
     public void addToGame(Game game){
         game.addSprite(this);

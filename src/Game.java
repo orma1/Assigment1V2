@@ -7,8 +7,8 @@ import java.awt.*;
 public class Game {
     private final int FRAME_WIDTH = 800;
     private final int FRAME_HEIGHT = 600;
-    private SpriteCollection sprites;
-    private GameEnvironment environment;
+    private final SpriteCollection sprites;
+    private final GameEnvironment environment;
     private Paddle paddle;
     GUI gui;
     public Game(){
@@ -30,36 +30,49 @@ public class Game {
         gui = new GUI("check", FRAME_WIDTH, FRAME_HEIGHT);
         paddle = new Paddle(new Rectangle(new Point(300,500),100,20),Color.YELLOW,gui);
         paddle.addToGame(this);
-        Ball ball = new Ball(400, 300, 20, Color.RED, environment);
+        Ball ball = new Ball(400, 300, 10, Color.WHITE, environment);
         ball.setVelocity(new Velocity(5,5));
         ball.addToGame(this);
-        int thickness = 50;
-
+        Ball secondBall = new Ball(300, 300, 10, Color.WHITE, environment);
+        secondBall.setVelocity(new Velocity(5,5));
+        secondBall.addToGame(this);
+        int thickness = 20;
         // Top Wall
-        Block top = new Block(new Point(0-thickness, 0-thickness), FRAME_WIDTH, thickness);
+        Block top = new Block(new Point(0, 0), FRAME_WIDTH, thickness, Color.GRAY);
         top.addToGame(this);
-
         // Left Wall
-        Block left = new Block(new Point(0-thickness, 0-thickness), thickness, FRAME_HEIGHT);
+        Block left = new Block(new Point(0, 0), thickness, FRAME_HEIGHT, Color.GRAY);
         left.addToGame(this);
-
         // Right Wall (Starts at 800 - 50 = 750)
-        Block right = new Block(new Point(FRAME_WIDTH, 0-thickness), thickness, FRAME_HEIGHT);
+        Block right = new Block(new Point(FRAME_WIDTH-thickness, 0), thickness, FRAME_HEIGHT, Color.GRAY);
         right.addToGame(this);
-
         // Bottom Wall (Starts at 600 - 50 = 550)
-        Block bottom = new Block(new Point(0-thickness, FRAME_HEIGHT), FRAME_WIDTH, thickness);
+        Block bottom = new Block(new Point(0, FRAME_HEIGHT-thickness), FRAME_WIDTH, thickness, Color.GRAY);
         bottom.addToGame(this);
-        /*for(int i = 0; i<= FRAME_WIDTH;i+=50){
-            Block left = new Block(new Point(-50,i),50,50);
-            left.addToGame(this);
-            Block top = new Block(new Point(i,-50),50,50);
-            top.addToGame(this);
-            Block right = new Block(new Point(FRAME_WIDTH,i),50,50);
-            right.addToGame(this);
-            Block bottom = new Block(new Point(i,FRAME_HEIGHT),50,50);
-            bottom.addToGame(this);
-        }*/
+        for (int i = 100; i < FRAME_WIDTH-thickness; i+=thickness) {//Gray Row
+            Block current = new Block(new Point(i,100),thickness,20,Color.GRAY);
+            current.addToGame(this);
+        }
+        for (int i = 120; i < FRAME_WIDTH-thickness; i+=thickness) {//Red Row
+            Block current = new Block(new Point(i,120),thickness,20,Color.RED);
+            current.addToGame(this);
+        }
+        for (int i = 140; i < FRAME_WIDTH-thickness; i+=thickness) {//Yellow Row
+            Block current = new Block(new Point(i,140),thickness,20,Color.YELLOW);
+            current.addToGame(this);
+        }
+        for (int i = 160; i < FRAME_WIDTH-thickness; i+=thickness) {//Blue Row
+            Block current = new Block(new Point(i,160),thickness,20,Color.BLUE);
+            current.addToGame(this);
+        }
+        for (int i = 180; i < FRAME_WIDTH-thickness; i+=thickness) {//Pink Row
+            Block current = new Block(new Point(i,180),thickness,20,Color.PINK);
+            current.addToGame(this);
+        }
+        for (int i = 200; i < FRAME_WIDTH-thickness; i+=thickness) {//Green Row
+            Block current = new Block(new Point(i,200),thickness,20,Color.GREEN);
+            current.addToGame(this);
+        }
     }
 
 
