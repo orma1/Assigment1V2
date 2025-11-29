@@ -52,4 +52,7 @@ public class Rectangle {
     public Point getUpperLeft(){
         return upperLeft;
     }
+    public void setUpperLeft(Point upperLeft){
+        this.upperLeft = upperLeft;
+    }
 }
