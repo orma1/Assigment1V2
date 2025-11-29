@@ -31,11 +31,13 @@ public class GameEnvironment {
                     if (closest == null) {
                         closest = currentPoint;
                         mimimumDistance = currentDistance;
+                        closestColidable = currentColidable;
                     }
                     else {
                         if (currentDistance < mimimumDistance) {
                             closestColidable = currentColidable;
                             closest = currentPoint;
+                            mimimumDistance = currentDistance;
                         }
                     }
 

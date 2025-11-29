@@ -7,7 +7,7 @@ public class Block implements Collidable, Sprite {
     private Rectangle collisionRect;
     private Point upperLeft;
     private double width, height;
-    int r,g,b;
+    private Color color;
 
 
     public Block(Rectangle collisionRect) {
@@ -15,6 +15,7 @@ public class Block implements Collidable, Sprite {
         int r = random.nextInt(255);
         int g = random.nextInt(255);
         int b = random.nextInt(255);
+        this.color = new Color(r,g,b);
         this.collisionRect = collisionRect;
         this.upperLeft = collisionRect.getUpperLeft();
         this.width = collisionRect.getWidth();
@@ -22,6 +23,11 @@ public class Block implements Collidable, Sprite {
     }
 
     public Block(Point upperLeft, double width, double height) {
+        Random random = new Random();
+        int r = random.nextInt(255);
+        int g = random.nextInt(255);
+        int b = random.nextInt(255);
+        this.color = new Color(r,g,b);
         this.collisionRect = new Rectangle(upperLeft, width, height);
         this.upperLeft = upperLeft;
         this.width = width;
@@ -48,7 +54,7 @@ public class Block implements Collidable, Sprite {
         double dy = currentVelocity.getDy();
 
         // Small threshold for double comparison
-        double epsilon = 0.0001;
+        double epsilon = 0.001;
 
         // Check if the collision point is on the vertical edges (Left or Right)
         // If so, reverse the horizontal direction
@@ -65,7 +71,7 @@ public class Block implements Collidable, Sprite {
         return new Velocity(dx, dy);
     }
     public void drawOn(DrawSurface surface){
-        surface.setColor(new Color(r,g,b));
+        surface.setColor(color);
         surface.fillRectangle((int) this.upperLeft.getX(), (int) this.upperLeft.getY(),
                 (int) width, (int) height);
     }

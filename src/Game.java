@@ -26,18 +26,36 @@ public class Game {
     // and add them to the game.
     public void initialize() {
         gui = new GUI("check", FRAME_WIDTH, FRAME_HEIGHT);
-        Ball ball = new Ball(400, 700, 20, Color.RED, environment);
+        Ball ball = new Ball(400, 300, 20, Color.RED, environment);
+        ball.setVelocity(new Velocity(5,5));
         ball.addToGame(this);
-        for(int i = 0; i<= FRAME_WIDTH;i+=50){
-            Block left = new Block(new Point(0,i),50,50);
+        int thickness = 50;
+
+        // Top Wall
+        Block top = new Block(new Point(0-thickness, 0-thickness), FRAME_WIDTH, thickness);
+        top.addToGame(this);
+
+        // Left Wall
+        Block left = new Block(new Point(0-thickness, 0-thickness), thickness, FRAME_HEIGHT);
+        left.addToGame(this);
+
+        // Right Wall (Starts at 800 - 50 = 750)
+        Block right = new Block(new Point(FRAME_WIDTH, 0-thickness), thickness, FRAME_HEIGHT);
+        right.addToGame(this);
+
+        // Bottom Wall (Starts at 600 - 50 = 550)
+        Block bottom = new Block(new Point(0-thickness, FRAME_HEIGHT), FRAME_WIDTH, thickness);
+        bottom.addToGame(this);
+        /*for(int i = 0; i<= FRAME_WIDTH;i+=50){
+            Block left = new Block(new Point(-50,i),50,50);
             left.addToGame(this);
-            Block top = new Block(new Point(i,0),50,50);
+            Block top = new Block(new Point(i,-50),50,50);
             top.addToGame(this);
             Block right = new Block(new Point(FRAME_WIDTH,i),50,50);
             right.addToGame(this);
             Block bottom = new Block(new Point(i,FRAME_HEIGHT),50,50);
             bottom.addToGame(this);
-        }
+        }*/
     }
 
 

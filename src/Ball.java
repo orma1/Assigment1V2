@@ -36,6 +36,7 @@ public class Ball implements Sprite {
         this.gameEnvironment = gameEnvironment;
     }
 
+
     // accessors
     public int getX(){
         return (int) center.getX();
@@ -89,24 +90,24 @@ public class Ball implements Sprite {
 
             Point collisionPoint = collisionInfo.collisionPoint();
 
-            // 2. Define a small "epsilon" distance to back up
-            double epsilon = 0.00001;
+
+            double epsilon = 0.001;
 
             // 3. Calculate the new location slightly "before" the impact
             // We back up on the X axis opposite to the velocity direction
             double newX = collisionPoint.getX();
             if (v.getDx() > 0) {
-                newX = newX - epsilon;
+                newX = newX - (epsilon+trajectory.start().distance(center));
             } else if (v.getDx() < 0) {
-                newX = newX + epsilon;
+                newX = newX + (epsilon+trajectory.start().distance(center));
             }
 
             // We back up on the Y axis opposite to the velocity direction
             double newY = collisionPoint.getY();
             if (v.getDy() > 0) {
-                newY = newY - epsilon;
+                newY = newY - (epsilon+trajectory.start().distance(center));
             } else if (v.getDy() < 0) {
-                newY = newY + epsilon;
+                newY = newY + (epsilon+trajectory.start().distance(center));
             }
 
             // 4. Move the ball to this "almost" collision point
