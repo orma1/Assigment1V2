@@ -54,5 +54,6 @@ public class Rectangle {
     }
     public void setUpperLeft(Point upperLeft){
         this.upperLeft = upperLeft;
+        setRecLines();
     }
 }

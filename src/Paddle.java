@@ -24,12 +24,11 @@ public class Paddle implements Sprite, Collidable {
 
     // Sprite
     public void timePassed(){
-        return; // no need to do anything, it is controlled by the player
+        if(keyboard.isPressed(KeyboardSensor.LEFT_KEY)) moveLeft();
+        if(keyboard.isPressed(KeyboardSensor.RIGHT_KEY)) moveRight();
     }
     public void drawOn(DrawSurface d){
         d.setColor(color);
-        if(keyboard.isPressed(KeyboardSensor.LEFT_KEY)) moveLeft();
-        if(keyboard.isPressed(KeyboardSensor.RIGHT_KEY)) moveRight();
         Point upperLeft = this.collisionRectangle.getUpperLeft();
         double width = this.collisionRectangle.getWidth();
         double height = this.collisionRectangle.getHeight();
@@ -50,6 +49,7 @@ public class Paddle implements Sprite, Collidable {
         double rectRight = this.collisionRectangle.getUpperLeft().getX() + this.collisionRectangle.getWidth();
         double rectTop = this.collisionRectangle.getUpperLeft().getY();
         double rectBottom = this.collisionRectangle.getUpperLeft().getY() + this.collisionRectangle.getHeight();
+
 
         double dx = currentVelocity.getDx();
         double dy = currentVelocity.getDy();
