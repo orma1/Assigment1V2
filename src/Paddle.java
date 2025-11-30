@@ -68,19 +68,19 @@ public class Paddle implements Sprite, Collidable {
         if (Math.abs(y - rectTop) < epsilon || Math.abs(y - rectBottom) < epsilon) {
             double regionWidth = getCollisionRectangle().getWidth()/5;
             double collisionX = collisionPoint.getX();
-            if(collisionX > rectLeft && collisionX < rectLeft + regionWidth){// region 1
+            if(collisionX > rectLeft && collisionX <= rectLeft + regionWidth){// region 1
                 return Velocity.fromAngleAndSpeed(300, 5);
             }
-            else if(collisionX > rectLeft + regionWidth && collisionX < rectLeft + regionWidth*2) {// region 2
+            else if(collisionX > rectLeft + regionWidth && collisionX <= rectLeft + regionWidth*2) {// region 2
                 return Velocity.fromAngleAndSpeed(330, 5);
             }
-            else if(collisionX > rectLeft + regionWidth*2 && collisionX < rectLeft + regionWidth*3) {// region 3
+            else if(collisionX > rectLeft + regionWidth*2 && collisionX <= rectLeft + regionWidth*3) {// region 3
                 return new Velocity(dx,-dy);
             }
-            else if(collisionX > rectLeft + regionWidth*3 && collisionX < rectLeft + regionWidth*4) {// region 4
+            else if(collisionX > rectLeft + regionWidth*3 && collisionX <= rectLeft + regionWidth*4) {// region 4
                 return Velocity.fromAngleAndSpeed(30, 5);
             }
-            else if(collisionX > rectLeft + regionWidth*4 && collisionX < rectLeft + regionWidth*5) {// region 5
+            else if(collisionX > rectLeft + regionWidth*4 && collisionX <= rectLeft + regionWidth*5) {// region 5
                 return Velocity.fromAngleAndSpeed(60, 5);
             }
         }
