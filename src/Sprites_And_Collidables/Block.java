@@ -1,8 +1,13 @@
+package Sprites_And_Collidables;
+
+import Game.Game;
+import Geometry.Point;
+import Geometry.Rectangle;
 import biuoop.DrawSurface;
 import java.awt.*;
 public class Block implements Collidable, Sprite {
-    private final Rectangle collisionRect;
-    private final Point upperLeft;
+    private final Geometry.Rectangle collisionRect;
+    private final Geometry.Point upperLeft;
     private final double width;
     private final double height;
     private final Color color;
@@ -12,7 +17,7 @@ public class Block implements Collidable, Sprite {
 
     public Block(Point upperLeft, double width, double height, Color color) {
         this.color = color;
-        this.collisionRect = new Rectangle(upperLeft, width, height);
+        this.collisionRect = new Geometry.Rectangle(upperLeft, width, height);
         this.upperLeft = upperLeft;
         this.width = width;
         this.height = height;
@@ -24,7 +29,7 @@ public class Block implements Collidable, Sprite {
     }
 
     @Override
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(Geometry.Point collisionPoint, Velocity currentVelocity) {
         double x = collisionPoint.getX();
         double y = collisionPoint.getY();
 

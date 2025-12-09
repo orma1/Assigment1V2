@@ -1,3 +1,10 @@
+package Game;
+
+import Sprites_And_Collidables.Collidable;
+import Sprites_And_Collidables.Paddle;
+import Geometry.Point;
+import Geometry.Rectangle;
+import Sprites_And_Collidables.*;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
@@ -24,11 +31,11 @@ public class Game {
         sprites.addSprite(s);
     }
 
-    // Initialize a new game: create the Blocks and Ball (and Paddle)
+    // Initialize a new game: create the Blocks and Sprites.Ball (and Sprites.Paddle)
     // and add them to the game.
     public void initialize() {
         gui = new GUI("check", FRAME_WIDTH, FRAME_HEIGHT);
-        paddle = new Paddle(new Rectangle(new Point(300,500),100,20),Color.YELLOW,gui);
+        paddle = new Paddle(new Rectangle(new Geometry.Point(300,500),100,20),Color.YELLOW,gui);
         paddle.addToGame(this);
         Ball ball = new Ball(400, 300, 10, Color.WHITE, environment);
         ball.setVelocity(new Velocity(5,5));
@@ -38,27 +45,27 @@ public class Game {
         secondBall.addToGame(this);
         int thickness = 20;
         // Top Wall
-        Block top = new Block(new Point(0, 0), FRAME_WIDTH, thickness, Color.GRAY);
+        Block top = new Block(new Geometry.Point(0, 0), FRAME_WIDTH, thickness, Color.GRAY);
         top.addToGame(this);
         // Left Wall
-        Block left = new Block(new Point(0, 0), thickness, FRAME_HEIGHT, Color.GRAY);
+        Block left = new Block(new Geometry.Point(0, 0), thickness, FRAME_HEIGHT, Color.GRAY);
         left.addToGame(this);
         // Right Wall (Starts at 800 - 50 = 750)
-        Block right = new Block(new Point(FRAME_WIDTH-thickness, 0), thickness, FRAME_HEIGHT, Color.GRAY);
+        Block right = new Block(new Geometry.Point(FRAME_WIDTH-thickness, 0), thickness, FRAME_HEIGHT, Color.GRAY);
         right.addToGame(this);
         // Bottom Wall (Starts at 600 - 50 = 550)
-        Block bottom = new Block(new Point(0, FRAME_HEIGHT-thickness), FRAME_WIDTH, thickness, Color.GRAY);
+        Block bottom = new Block(new Geometry.Point(0, FRAME_HEIGHT-thickness), FRAME_WIDTH, thickness, Color.GRAY);
         bottom.addToGame(this);
         for (int i = 100; i < FRAME_WIDTH-thickness; i+=thickness) {//Gray Row
-            Block current = new Block(new Point(i,100),thickness,20,Color.GRAY);
+            Block current = new Block(new Geometry.Point(i,100),thickness,20,Color.GRAY);
             current.addToGame(this);
         }
         for (int i = 120; i < FRAME_WIDTH-thickness; i+=thickness) {//Red Row
-            Block current = new Block(new Point(i,120),thickness,20,Color.RED);
+            Block current = new Block(new Geometry.Point(i,120),thickness,20,Color.RED);
             current.addToGame(this);
         }
         for (int i = 140; i < FRAME_WIDTH-thickness; i+=thickness) {//Yellow Row
-            Block current = new Block(new Point(i,140),thickness,20,Color.YELLOW);
+            Block current = new Block(new Geometry.Point(i,140),thickness,20,Color.YELLOW);
             current.addToGame(this);
         }
         for (int i = 160; i < FRAME_WIDTH-thickness; i+=thickness) {//Blue Row
@@ -66,11 +73,11 @@ public class Game {
             current.addToGame(this);
         }
         for (int i = 180; i < FRAME_WIDTH-thickness; i+=thickness) {//Pink Row
-            Block current = new Block(new Point(i,180),thickness,20,Color.PINK);
+            Block current = new Block(new Geometry.Point(i,180),thickness,20,Color.PINK);
             current.addToGame(this);
         }
         for (int i = 200; i < FRAME_WIDTH-thickness; i+=thickness) {//Green Row
-            Block current = new Block(new Point(i,200),thickness,20,Color.GREEN);
+            Block current = new Block(new Geometry.Point(i,200),thickness,20,Color.GREEN);
             current.addToGame(this);
         }
     }

@@ -1,3 +1,9 @@
+package Sprites_And_Collidables;
+
+import Geometry.CollisionInfo;
+import Geometry.Line;
+import Geometry.Point;
+
 import java.util.ArrayList;
 import java.util.List;
 

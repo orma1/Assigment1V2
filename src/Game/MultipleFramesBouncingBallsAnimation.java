@@ -1,3 +1,8 @@
+package Game;
+
+import Geometry.Point;
+import Sprites_And_Collidables.Ball;
+import Sprites_And_Collidables.Velocity;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
@@ -30,7 +35,7 @@ public class MultipleFramesBouncingBallsAnimation {
             Velocity v;
             if (size > 50) v = Velocity.fromAngleAndSpeed(x,3);//if size is >=50 we have a set low speed.
             else v = Velocity.fromAngleAndSpeed(x,200.0/size);
-            balls[i] = new Ball(new Point(x,y),size, Color.BLACK);
+            balls[i] = new Ball(new Geometry.Point(x,y),size, Color.BLACK);
             balls[i].setVelocity(v);
 
         }
@@ -56,10 +61,10 @@ public class MultipleFramesBouncingBallsAnimation {
             d.fillRectangle(FRAME1_START,FRAME1_START,FRAME1_SIZE,FRAME1_SIZE);
             d.setColor(Color.YELLOW);
             d.fillRectangle(FRAME2_START,FRAME2_START,FRAME2_SIZE,FRAME2_SIZE);
-            Point frame1Start = new Point(FRAME1_START,FRAME1_START);
-            Point frame1End = new Point(FRAME1_START+FRAME1_SIZE,FRAME1_START+FRAME1_SIZE);
-            Point frame2Start = new Point(FRAME2_START,FRAME2_START);
-            Point frame2End = new Point(FRAME2_START+FRAME2_SIZE,FRAME2_START+FRAME2_SIZE);
+            Point frame1Start = new Geometry.Point(FRAME1_START,FRAME1_START);
+            Geometry.Point frame1End = new Geometry.Point(FRAME1_START+FRAME1_SIZE,FRAME1_START+FRAME1_SIZE);
+            Geometry.Point frame2Start = new Geometry.Point(FRAME2_START,FRAME2_START);
+            Geometry.Point frame2End = new Geometry.Point(FRAME2_START+FRAME2_SIZE,FRAME2_START+FRAME2_SIZE);
             for (int i = 0; i < balls.length; i++) {//drawing each ball in the right place.
                 if(i < Math.floor((balls.length)/2.0)) balls[i].moveOneStepWithFrame(frame1Start,frame1End);
                 else balls[i].moveOneStepWithFrame(frame2Start,frame2End);

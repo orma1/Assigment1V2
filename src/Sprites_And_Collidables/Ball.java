@@ -1,23 +1,26 @@
+package Sprites_And_Collidables;
+
+import Game.Game;
+import Geometry.CollisionInfo;
+import Geometry.Line;
+import Geometry.Point;
 import biuoop.DrawSurface;
 
-import java.awt.*;
-import java.util.Random;
-
 public class Ball implements Sprite {
-    private Point center;
+    private Geometry.Point center;
     private int r; //radius
     private java.awt.Color color;
     private Velocity v;
     private GameEnvironment gameEnvironment;
     // constructor
-    public Ball(Point center, int r, java.awt.Color color){
+    public Ball(Geometry.Point center, int r, java.awt.Color color){
 
         this.center = center;
         this.r = r;
         this.color = color;
         this.v = new Velocity(0,0);
     }
-    public Ball(Point center, int r, java.awt.Color color, GameEnvironment gameEnvironment){
+    public Ball(Geometry.Point center, int r, java.awt.Color color, GameEnvironment gameEnvironment){
         this.gameEnvironment = gameEnvironment;
         this.center = center;
         this.r = r;
@@ -25,12 +28,12 @@ public class Ball implements Sprite {
         this.v = new Velocity(0,0);
     }
     public Ball(int x, int y, int r, java.awt.Color color){
-        this.center = new Point(x,y);
+        this.center = new Geometry.Point(x,y);
         this.r = r;
         this.color = color;
     }
     public Ball(int x, int y, int r, java.awt.Color color, GameEnvironment gameEnvironment){
-        this.center = new Point(x,y);
+        this.center = new Geometry.Point(x,y);
         this.r = r;
         this.color = color;
         this.gameEnvironment = gameEnvironment;
@@ -74,9 +77,9 @@ public class Ball implements Sprite {
     //move one step according to velocity
     public void moveOneStep() {
         //if no frame is given, we set the default to 200
-        //moveOneStepWithFrame(new Point(0,0), new Point(200,200));
+        //moveOneStepWithFrame(new Geometry.Point(0,0), new Geometry.Point(200,200));
         if (v == null) v = new Velocity(0,0);// if velocity is null we create 0 velocity to not crash
-        //we create the Line of the trajectory from the current position to the new one after applying velocity
+        //we create the Geometry.Line of the trajectory from the current position to the new one after applying velocity
         Line trajectory = new Line(center,
                 new Point(center.getX()+v.getDx(),center.getY()+v.getDy()));
         CollisionInfo collisionInfo = gameEnvironment.getClosestCollision(trajectory);
@@ -88,7 +91,7 @@ public class Ball implements Sprite {
         }
         else {
 
-            Point collisionPoint = collisionInfo.collisionPoint();
+            Geometry.Point collisionPoint = collisionInfo.collisionPoint();
 
 
             double epsilon = 0.001;
@@ -123,7 +126,7 @@ public class Ball implements Sprite {
         }
     }
     //move step with borders of the frame.
-    public void moveOneStepWithFrame(Point p1, Point p2) {
+    public void moveOneStepWithFrame(Geometry.Point p1, Geometry.Point p2) {
         if (v == null){
             //if there is no velocity, we create one, so we will not get null reference error
             v = new Velocity(0,0);

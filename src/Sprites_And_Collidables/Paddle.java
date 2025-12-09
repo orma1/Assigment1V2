@@ -1,3 +1,8 @@
+package Sprites_And_Collidables;
+
+import Game.Game;
+import Geometry.Point;
+import Geometry.Rectangle;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
@@ -5,38 +10,38 @@ import biuoop.KeyboardSensor;
 import java.awt.*;
 
 public class Paddle implements Sprite, Collidable {
-    private final Rectangle collisionRectangle;
+    private final Geometry.Rectangle collisionRectangle;
     private final Color color;
     private final biuoop.KeyboardSensor keyboard;
-    public Paddle(Rectangle collisionRectangle, Color color, GUI gui){
+    public Paddle(Geometry.Rectangle collisionRectangle, Color color, GUI gui){
         this.collisionRectangle = collisionRectangle;
         this.color = color;
         keyboard = gui.getKeyboardSensor();
     }
     public void moveLeft(){
-        Point current = collisionRectangle.getUpperLeft();
-        this.collisionRectangle.setUpperLeft(new Point(current.getX() -5,current.getY()));
+        Geometry.Point current = collisionRectangle.getUpperLeft();
+        this.collisionRectangle.setUpperLeft(new Geometry.Point(current.getX() -5,current.getY()));
     }
     public void moveRight(){
-        Point current = collisionRectangle.getUpperLeft();
-        this.collisionRectangle.setUpperLeft(new Point(current.getX() + 5,current.getY()));
+        Geometry.Point current = collisionRectangle.getUpperLeft();
+        this.collisionRectangle.setUpperLeft(new Geometry.Point(current.getX() + 5,current.getY()));
     }
 
-    // Sprite
+    // Sprites.Sprite
     public void timePassed(){
         if(keyboard.isPressed(KeyboardSensor.LEFT_KEY)) moveLeft();
         if(keyboard.isPressed(KeyboardSensor.RIGHT_KEY)) moveRight();
     }
     public void drawOn(DrawSurface d){
         d.setColor(color);
-        Point upperLeft = this.collisionRectangle.getUpperLeft();
+        Geometry.Point upperLeft = this.collisionRectangle.getUpperLeft();
         double width = this.collisionRectangle.getWidth();
         double height = this.collisionRectangle.getHeight();
         d.fillRectangle((int) upperLeft.getX(), (int) upperLeft.getY(),
                 (int) width, (int) height);
     }
 
-    // Collidable
+    // Sprites_And_Colidables.Collidable
     public Rectangle getCollisionRectangle(){
         return this.collisionRectangle;
     }

@@ -1,3 +1,5 @@
+package Sprites_And_Collidables;
+
 import biuoop.DrawSurface;
 
 public interface Sprite {

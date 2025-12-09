@@ -1,3 +1,8 @@
+package Game;
+
+import Geometry.Point;
+import Sprites_And_Collidables.Ball;
+import Sprites_And_Collidables.Velocity;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
@@ -14,7 +19,7 @@ public class MultipleBouncingBallsAnimation {
                 size = Integer.parseInt(args[i]);//size is from the run arguments
                 int x = rand.nextInt(200);//random x and y coordinate.
                 int y = rand.nextInt(200);
-                Point start = new Point(x,y);
+                Point start = new Geometry.Point(x,y);
                 Velocity v;
                 if (size > 50) v = Velocity.fromAngleAndSpeed(x,3);
                 else v = Velocity.fromAngleAndSpeed(x,200.0/size);

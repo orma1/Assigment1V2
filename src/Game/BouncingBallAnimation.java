@@ -1,11 +1,10 @@
+package Game;
+
+import Geometry.Point;
+import Sprites_And_Collidables.Ball;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 
 public class BouncingBallAnimation {
@@ -13,7 +12,7 @@ public class BouncingBallAnimation {
         drawAnimation(new Point(Integer.parseInt(args[0]),Integer.parseInt(args[1])),
                 Integer.parseInt(args[2]),Integer.parseInt(args[3]));
     }
-    static void drawAnimation(Point start, double dx, double dy) {
+    static void drawAnimation(Geometry.Point start, double dx, double dy) {
         GUI gui = new GUI("title", 200, 200);
         Sleeper sleeper = new Sleeper();
         Ball ball = new Ball((int) start.getX(), (int) start.getY(), 30, java.awt.Color.BLACK);

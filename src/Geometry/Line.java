@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package Geometry;
+
 import java.util.List;
 
 public class Line {
@@ -15,7 +16,7 @@ public class Line {
 
     // Return the length of the line
     public double length() {
-        return start.distance(end); //we can reuse the distance method from Point class for this
+        return start.distance(end); //we can reuse the distance method from Geometry.Point class for this
     }
 
     // Returns the middle point of the line

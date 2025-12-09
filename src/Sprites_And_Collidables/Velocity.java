@@ -1,4 +1,8 @@
-// Velocity specifies the change in position on the `x` and the `y` axes.
+package Sprites_And_Collidables;
+
+import Geometry.Point;
+
+// Sprites.Velocity specifies the change in position on the `x` and the `y` axes.
 public class Velocity {
     private double dx,dy;
     // constructor

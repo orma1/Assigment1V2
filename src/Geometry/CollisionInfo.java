@@ -1,3 +1,7 @@
+package Geometry;
+
+import Sprites_And_Collidables.Collidable;
+
 public class CollisionInfo {
     private Point collisionPoint;
     private Collidable collisionObject;

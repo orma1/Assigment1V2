@@ -1,3 +1,8 @@
+package Sprites_And_Collidables;
+
+import Geometry.Point;
+import Geometry.Rectangle;
+
 public interface Collidable {
     // Return the "collision shape" of the object.
     Rectangle getCollisionRectangle();

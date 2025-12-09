@@ -1,3 +1,7 @@
+package Game;
+
+import Geometry.Line;
+import Geometry.Point;
 import biuoop.GUI;
 import biuoop.DrawSurface;
 import java.util.ArrayList;
