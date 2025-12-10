@@ -26,10 +26,12 @@ public class Game {
     public void addCollidable(Collidable c) {
         environment.addCollidable(c);
     }
+    public void removeCollidable(Collidable c){environment.removeCollidable(c);}
 
     public void addSprite(Sprite s) {
         sprites.addSprite(s);
     }
+    public void removeSprite(Sprite s){sprites.removeSprite(s);}
 
     // Initialize a new game: create the Blocks and Sprites.Ball (and Sprites.Paddle)
     // and add them to the game.
