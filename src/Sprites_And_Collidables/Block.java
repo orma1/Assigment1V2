@@ -5,12 +5,16 @@ import Geometry.Point;
 import Geometry.Rectangle;
 import biuoop.DrawSurface;
 import java.awt.*;
-public class Block implements Collidable, Sprite {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Block implements Collidable, Sprite, HitNotifier {
     private final Geometry.Rectangle collisionRect;
     private final Geometry.Point upperLeft;
     private final double width;
     private final double height;
     private final Color color;
+    private List<HitListener> hitListeners;
 
 
 
@@ -21,6 +25,7 @@ public class Block implements Collidable, Sprite {
         this.upperLeft = upperLeft;
         this.width = width;
         this.height = height;
+        this.hitListeners = new ArrayList<>();
     }
 
     @Override
@@ -29,7 +34,7 @@ public class Block implements Collidable, Sprite {
     }
 
     @Override
-    public Velocity hit(Geometry.Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(Ball hitter, Geometry.Point collisionPoint, Velocity currentVelocity) {
         double x = collisionPoint.getX();
         double y = collisionPoint.getY();
 
@@ -56,7 +61,7 @@ public class Block implements Collidable, Sprite {
         if (Math.abs(y - rectTop) < epsilon || Math.abs(y - rectBottom) < epsilon) {
             dy = -dy;
         }
-
+        this.notifyHit(hitter);
         return new Velocity(dx, dy);
     }
     public void drawOn(DrawSurface surface){
@@ -76,5 +81,20 @@ public class Block implements Collidable, Sprite {
     public void removeFromGame(Game game){
         game.removeCollidable(this);
         game.removeSprite(this);
+    }
+
+    private void notifyHit(Ball hitter) {
+        // Make a copy of the hitListeners before iterating over them.
+        List<HitListener> listeners = new ArrayList<HitListener>(this.hitListeners);
+        // Notify all listeners about a hit event:
+        for (HitListener hl : listeners) {
+            hl.hitEvent(this, hitter);
+        }
+    }
+    public void addHitListener(HitListener hl){
+        this.hitListeners.add(hl);
+    }
+    public void removeHitListener(HitListener hl){
+        this.hitListeners.remove(hl);
     }
 }

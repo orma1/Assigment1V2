@@ -122,7 +122,7 @@ public class Ball implements Sprite {
 
             // Important: We pass the EXACT collision point to the hit method,
             // not the "almost" point, because the block expects to know where it was hit.
-            this.v = collided.hit(collisionPoint, this.v);
+            this.v = collided.hit(this,  collisionPoint, this.v);
         }
     }
     //move step with borders of the frame.
@@ -155,5 +155,8 @@ public class Ball implements Sprite {
     }
     public void addToGame(Game game){
         game.addSprite(this);
+    }
+    public void removeFromGame(Game g){
+        g.removeSprite(this);
     }
 }

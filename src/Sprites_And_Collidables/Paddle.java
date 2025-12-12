@@ -45,7 +45,7 @@ public class Paddle implements Sprite, Collidable {
     public Rectangle getCollisionRectangle(){
         return this.collisionRectangle;
     }
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity){
+    public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity){
         double x = collisionPoint.getX();
         double y = collisionPoint.getY();
 
