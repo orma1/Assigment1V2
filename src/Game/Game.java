@@ -18,11 +18,12 @@ public class Game {
     private final GameEnvironment environment;
     private Paddle paddle;
     GUI gui;
-    private Counter numberOfBlocks;
-    private BlockRemover blockRemover;
-    private Counter numberOfBalls;
-    private BallRemover ballRemover;
+    private final Counter numberOfBlocks;
+    private final BlockRemover blockRemover;
+    private final Counter numberOfBalls;
+    private final BallRemover ballRemover;
     public Game(){
+        //initialize data members
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
         numberOfBlocks = new Counter();
