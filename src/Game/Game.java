@@ -7,11 +7,11 @@ import Geometry.Rectangle;
 import Sprites_And_Collidables.*;
 import biuoop.DrawSurface;
 import biuoop.GUI;
-import biuoop.Sleeper;
+import biuoop.KeyboardSensor;
 
 import java.awt.*;
 
-public class Game {
+public class Game implements Animation {
     private final int FRAME_WIDTH = 800;
     private final int FRAME_HEIGHT = 600;
     private final SpriteCollection sprites;
@@ -22,6 +22,9 @@ public class Game {
     private final BlockRemover blockRemover;
     private final Counter numberOfBalls;
     private final BallRemover ballRemover;
+    private AnimationRunner runner;
+    private boolean running;
+    private KeyboardSensor keyboard;
     public Game(){
         //initialize data members
         sprites = new SpriteCollection();
@@ -35,7 +38,7 @@ public class Game {
         environment.addCollidable(c);
     }
     public void removeCollidable(Collidable c){environment.removeCollidable(c);}
-
+    public boolean shouldStop() { return !this.running; }
     public void addSprite(Sprite s) {
         sprites.addSprite(s);
     }
@@ -45,6 +48,8 @@ public class Game {
     // and add them to the game.
     public void initialize() {
         gui = new GUI("check", FRAME_WIDTH, FRAME_HEIGHT);
+        runner = new AnimationRunner(60, gui);
+        keyboard = gui.getKeyboardSensor();
         PrintingHitListener hl = new PrintingHitListener();
         paddle = new Paddle(new Rectangle(new Geometry.Point(300,500),100,20),Color.YELLOW,gui);
         paddle.addToGame(this);
@@ -113,32 +118,31 @@ public class Game {
             current.addHitListener(blockRemover);
         }
     }
+    public void doOneFrame(DrawSurface d) {
+        // the logic from the previous run method goes here.
+        // the `return` or `break` statements should be replaced with
+        // this.running = false;
+        if (this.keyboard.isPressed("p")) {
+            this.runner.run(new PauseScreen(this.keyboard));
+        }
+            this.sprites.drawAllOn(d);
+            this.sprites.notifyAllTimePassed();
 
+            if(numberOfBlocks.getValue() == 0 || numberOfBalls.getValue() == 0){//if no balls or no block we finish
+                gui.close();
+                this.running = false;
+            }
+
+
+
+
+    }
 
     // Run the game -- start the animation loop.
     public void run() {
-        Sleeper sleeper = new Sleeper();
-        int framesPerSecond = 60;
-        int millisecondsPerFrame = 1000 / framesPerSecond;
-        while (true) {
-            long startTime = System.currentTimeMillis(); // timing
-
-            DrawSurface d = gui.getDrawSurface();
-            this.sprites.drawAllOn(d);
-            gui.show(d);
-            this.sprites.notifyAllTimePassed();
-
-            // timing
-            long usedTime = System.currentTimeMillis() - startTime;
-            long milliSecondLeftToSleep = millisecondsPerFrame - usedTime;
-            if (milliSecondLeftToSleep > 0) {
-                sleeper.sleepFor(milliSecondLeftToSleep);
-            }
-            if(numberOfBlocks.getValue() == 0 || numberOfBalls.getValue() == 0){//if no balls or no block we finish
-                gui.close();
-                return;
-            }
-        }
+        this.running = true;
+        initialize();
+        this.runner.run(this);
     }
 
 
