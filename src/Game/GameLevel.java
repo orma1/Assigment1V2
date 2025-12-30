@@ -11,7 +11,7 @@ import biuoop.KeyboardSensor;
 
 import java.awt.*;
 
-public class Game implements Animation {
+public class GameLevel implements Animation {
     private final int FRAME_WIDTH = 800;
     private final int FRAME_HEIGHT = 600;
     private final SpriteCollection sprites;
@@ -25,7 +25,7 @@ public class Game implements Animation {
     private AnimationRunner runner;
     private boolean running;
     private KeyboardSensor keyboard;
-    public Game(){
+    public GameLevel(){
         //initialize data members
         sprites = new SpriteCollection();
         environment = new GameEnvironment();

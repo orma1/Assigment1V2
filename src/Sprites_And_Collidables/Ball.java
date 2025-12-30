@@ -1,6 +1,6 @@
 package Sprites_And_Collidables;
 
-import Game.Game;
+import Game.GameLevel;
 import Geometry.CollisionInfo;
 import Geometry.Line;
 import Geometry.Point;
@@ -153,10 +153,10 @@ public class Ball implements Sprite {
         }
         this.center = this.getVelocity().applyToPoint(this.center);
     }
-    public void addToGame(Game game){
-        game.addSprite(this);
+    public void addToGame(GameLevel gameLevel){
+        gameLevel.addSprite(this);
     }
-    public void removeFromGame(Game g){
+    public void removeFromGame(GameLevel g){
         g.removeSprite(this);
     }
 }

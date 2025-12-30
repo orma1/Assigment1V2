@@ -1,13 +1,13 @@
 package Sprites_And_Collidables;
 
-import Game.Game;
+import Game.GameLevel;
 
 public class BallRemover implements HitListener{
-    private Game game;
+    private GameLevel gameLevel;
     private Counter remainingBalls;
 
-    public BallRemover(Game game, Counter removedBalls) {
-        this.game = game;
+    public BallRemover(GameLevel gameLevel, Counter removedBalls) {
+        this.gameLevel = gameLevel;
         this.remainingBalls = removedBalls;
     }
 
@@ -18,7 +18,7 @@ public class BallRemover implements HitListener{
 
     @Override
     public void hitEvent(Block beingHit, Ball hitter) {
-        hitter.removeFromGame(game);
+        hitter.removeFromGame(gameLevel);
         this.remainingBalls.decrease(1);
     }
 }

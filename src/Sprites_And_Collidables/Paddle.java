@@ -1,6 +1,6 @@
 package Sprites_And_Collidables;
 
-import Game.Game;
+import Game.GameLevel;
 import Geometry.Point;
 import Geometry.Rectangle;
 import biuoop.DrawSurface;
@@ -93,7 +93,7 @@ public class Paddle implements Sprite, Collidable {
     }
 
     // Add this paddle to the game.
-    public void addToGame(Game g){
+    public void addToGame(GameLevel g){
         g.addSprite(this);
         g.addCollidable(this);
     }

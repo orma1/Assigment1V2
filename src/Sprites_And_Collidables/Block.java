@@ -1,6 +1,6 @@
 package Sprites_And_Collidables;
 
-import Game.Game;
+import Game.GameLevel;
 import Geometry.Point;
 import Geometry.Rectangle;
 import biuoop.DrawSurface;
@@ -74,13 +74,13 @@ public class Block implements Collidable, Sprite, HitNotifier {
     public void timePassed() {
         // for now, we do nothing
     }
-    public void addToGame(Game game){
-        game.addSprite(this);
-        game.addCollidable(this);
+    public void addToGame(GameLevel gameLevel){
+        gameLevel.addSprite(this);
+        gameLevel.addCollidable(this);
     }
-    public void removeFromGame(Game game){
-        game.removeCollidable(this);
-        game.removeSprite(this);
+    public void removeFromGame(GameLevel gameLevel){
+        gameLevel.removeCollidable(this);
+        gameLevel.removeSprite(this);
     }
 
     private void notifyHit(Ball hitter) {

@@ -1,8 +1,8 @@
-import Game.Game;
+import Game.GameLevel;
 
 public class Ass3Game {
     public static void main(String[] args) {
-        Game game = new Game();
-        game.run();
+        GameLevel gameLevel = new GameLevel();
+        gameLevel.run();
     }
 }

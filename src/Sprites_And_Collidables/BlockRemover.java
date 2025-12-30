@@ -1,15 +1,15 @@
 package Sprites_And_Collidables;
 
-import Game.Game;
+import Game.GameLevel;
 
 // a BlockRemover is in charge of removing blocks from the game, as well as keeping count
 // of the number of blocks that remain.
 public class BlockRemover implements HitListener {
-    private Game game;
+    private GameLevel gameLevel;
     private Counter remainingBlocks;
 
-    public BlockRemover(Game game, Counter removedBlocks) {
-        this.game = game;
+    public BlockRemover(GameLevel gameLevel, Counter removedBlocks) {
+        this.gameLevel = gameLevel;
         this.remainingBlocks = removedBlocks;
     }
 
@@ -18,7 +18,7 @@ public class BlockRemover implements HitListener {
     // that is being removed from the game.
     public void hitEvent(Block beingHit, Ball hitter) {
         beingHit.removeHitListener(this);
-        beingHit.removeFromGame(game);
+        beingHit.removeFromGame(gameLevel);
         this.remainingBlocks.decrease(1);
     }
 }
